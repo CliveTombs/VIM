@@ -6,11 +6,14 @@ sleep 5
 echo "Checking for pip. You will need pip!"
 pip --version
 read -p "Press enter to continue"
+echo "Checking for git"
+git --version
+read -p "Press enter to continue"
+sudo apt-get install libncurses5-dev libncursesw5-dev
 echo "Install vim"
-hg clone https://vim.googlecode.com/hg/ vim
-cd vim/src
+cd /tmp && git clone https://github.com/vim/vim.git && cd vim
 ./configure --enable-python3interp --with-features=huge
-make && make install
+make && sudo make install
 mkdir -p $HOME/bin
 cd $HOME/bin
 ln -s $HOME/opt/vim/bin/vim
@@ -36,6 +39,8 @@ git clone https://github.com/klen/python-mode
 echo "Install ftplugin"
 wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 #
+echo "Install the .rcfile"
+wget -O ~/.vimrc https://raw.githubusercontent.com/CliveTombs/VIM/master/.vimrc
 echo "Install supporting pycode."
 pip install pylama --user
 pip install linters --user
